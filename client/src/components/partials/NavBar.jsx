@@ -20,14 +20,13 @@ const Navbar = () => {
         <IconButton
           aria-label="Toggle Theme"
           icon={isDarkMode ? <FaSun /> : <FaMoon />}
-          //   colorScheme="white"
           onClick={toggleColorMode}
         />
         <Spacer />
         <Image
-          src="https://imgpile.com/images/9f9Umi.png"
+          src="https://imgpile.com/images/9f9TYM.png"
           alt="TypeChamp Logo"
-          boxSize={12}
+          boxSize={20}
         />
         <Spacer />
         <Avatar name="John Doe" src="avatar-image-url" size="sm" />

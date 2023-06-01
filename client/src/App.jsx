@@ -3,11 +3,12 @@ import { useState } from "react";
 import "./App.css";
 import TestBox from "./components/test_comp/TestBox";
 import TestResult from "./components/result_comp/TestResult";
+import Navbar from "./components/partials/NavBar";
 
 function App() {
   return (
     <>
-      Ram ram ji - TypeChamp
+      <Navbar />
       <TestBox />
       <TestResult />
     </>

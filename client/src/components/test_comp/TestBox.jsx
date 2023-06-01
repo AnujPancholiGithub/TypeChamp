@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text, useColorMode } from "@chakra-ui/react";
 import testData from "../data/string.json";
 import "../uityles.css";
 
@@ -9,6 +9,8 @@ const TestBox = () => {
   const [typoError, setTypoError] = useState(false);
   const [show, setShow] = useState(false);
   const inputRef = useRef(null);
+  const { colorMode } = useColorMode();
+  const isDarkMode = colorMode === "dark";
 
   const testText = testData.text;
   const wordsArray = Array.from(testText);
@@ -38,14 +40,9 @@ const TestBox = () => {
 
   const handleStartTest = () => {
     inputRef.current.focus();
-    setShow(!show);
   };
 
   const handleResetTest = () => {
-    inputRef.current.blur();
-    setCurrentKey(0);
-    setPressedKey("");
-    setTypoError(false);
     setShow(!show);
   };
 
@@ -57,11 +54,11 @@ const TestBox = () => {
       <Box
         ref={inputRef}
         onKeyDown={handleKeyPress}
-        boxShadow="lg"
+        boxShadow={isDarkMode ? "dark-lg" : "lg"}
         p={4}
         borderRadius="md"
-        bg="white"
-        // tabIndex={0}
+        bg={isDarkMode ? "gray.800" : "white"}
+        tabIndex={0}
       >
         <Text fontSize="xl" textAlign="center" mb={4}>
           {wordsArray.map((word, index) => (
@@ -87,7 +84,7 @@ const TestBox = () => {
         <Box display="flex" justifyContent="center">
           <Button
             onClick={!show ? handleStartTest : handleResetTest}
-            colorScheme="blue"
+            colorScheme={isDarkMode ? "teal" : "blue"}
           >
             {!show ? "Start Test" : "Reset"}
           </Button>

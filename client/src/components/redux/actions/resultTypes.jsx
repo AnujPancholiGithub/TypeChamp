@@ -1,0 +1,5 @@
+export const START_TIMER = "START TIMER";
+export const STOP_TIMER = "STOP TIMER";
+
+export const CORRECT_WORDS = "CORRECT WORDS";
+export const INCORRECT_WORDS = "INCORRECT WORDS";

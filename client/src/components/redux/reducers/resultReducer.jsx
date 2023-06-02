@@ -1,6 +1,8 @@
 import {
   CORRECT_WORDS,
   INCORRECT_WORDS,
+  SET_FINAL_RESULT,
+  SET_TEST_DEADLINE,
   START_TIMER,
   STOP_TIMER,
 } from "../actions/resultTypes";
@@ -9,6 +11,8 @@ const initialState = {
   time: 0,
   correctWordsCount: 0,
   inCorrectWordsCount: 0,
+  finalResult: {},
+  deadline: 60000,
 };
 
 export const resultReducer = (state = initialState, action) => {
@@ -29,6 +33,18 @@ export const resultReducer = (state = initialState, action) => {
       return {
         ...state,
         inCorrectWordsCount: action.inCorrectWordsCount,
+      };
+
+    case SET_FINAL_RESULT:
+      return {
+        state,
+        finalResult: action.result,
+      };
+
+    case SET_TEST_DEADLINE:
+      return {
+        ...state,
+        deadline: action.deadline,
       };
 
     default:

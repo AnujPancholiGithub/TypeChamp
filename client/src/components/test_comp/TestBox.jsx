@@ -5,6 +5,9 @@ import "../uityles.css";
 import LiveResult from "../result_comp/LiveResult";
 import { useDispatch, useSelector } from "react-redux";
 import { correctWords, inCorrectWords } from "../redux/actions/resultAction";
+import TimeSelectorMenu from "./TimerMenu";
+let correctWordsCount = 0;
+let inCorrectWordsCount = 0;
 
 const TestBox = () => {
   const [pressedKey, setPressedKey] = useState("");
@@ -19,11 +22,11 @@ const TestBox = () => {
   const reduxStore = useSelector((store) => store);
 
   const testText = testData.text;
-  const wordsArray = Array.from(testText);
-  const correctWordsCount = 0;
-  const inCorrectWordsCount = 0;
-
+  const wordsArray = Array.from(testText).slice(0, 235);
   const handleKeyPress = (e) => {
+    if (e.key === "Tab" || e.key === "CapsLock") {
+      return;
+    }
     setPressedKey(e.key);
 
     if (e.code === "Space" && !typoError && wordsArray[currentKey] === " ") {
@@ -32,15 +35,15 @@ const TestBox = () => {
 
     if (e.key === wordsArray[currentKey]) {
       setCurrentKey((prevKeyIndex) => prevKeyIndex + 1);
-      dispatch(correctWords(correctWordsCount + 1));
+      dispatch(correctWords(++correctWordsCount));
       if (typoError) {
         setTypoError(false);
       }
+    } else if (!typoError) {
+      dispatch(inCorrectWords(++inCorrectWordsCount));
+      setTypoError(true);
     } else {
-      if (!typoError) {
-        dispatch(inCorrectWords(inCorrectWordsCount + 1));
-        setTypoError(true);
-      }
+      dispatch(inCorrectWords(++inCorrectWordsCount));
     }
   };
 
@@ -59,10 +62,11 @@ const TestBox = () => {
 
   return (
     <Box maxWidth="600px" margin="0 auto">
-      <Box>
+      <Box display={"flex"}>
         <LiveResult isTestStart={show} wordCounter={wordCounter} />
+        <TimeSelectorMenu isTestStart={show} />
       </Box>
-      <Heading textAlign="center" mb={4}>
+      <Heading textAlign="center" fontSize={"2xl"} color={"#1CEDC9"} p={4}>
         Typing Test
       </Heading>
       <Box
@@ -83,7 +87,15 @@ const TestBox = () => {
                 currentKey === index ? (typoError ? "4xl" : "2xl") : "xl"
               }
               color={
-                currentKey === index ? (typoError ? "red" : "blue") : "black"
+                currentKey === index
+                  ? typoError
+                    ? "red"
+                    : isDarkMode
+                    ? "#F5B930"
+                    : "blue"
+                  : isDarkMode
+                  ? "white"
+                  : "black"
               }
               fontWeight="bold"
             >
@@ -98,7 +110,8 @@ const TestBox = () => {
         <Box display="flex" justifyContent="center">
           <Button
             onClick={!show ? handleStartTest : handleResetTest}
-            colorScheme={isDarkMode ? "teal" : "blue"}
+            // color={"#1CEDC9"}
+            colorScheme={isDarkMode ? "yellow" : "blue"}
           >
             {!show ? "Start Test" : "Reset"}
           </Button>

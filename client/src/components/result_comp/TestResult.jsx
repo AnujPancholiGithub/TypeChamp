@@ -3,31 +3,33 @@ import React from "react";
 
 const TestResult = () => {
   return (
-    <Box
-      // bg="#8C52FF"
-      display={"flex"}
-      justifyContent={"center"}
-    >
-      <Box boxShadow={"dark-lg"}>
+    <Box bg="#d3c7ed" display={"flex"} justifyContent={"center"}>
+      <Box boxShadow={"dark-lg"} position={"relative"}>
         <Image
-          position={"relative"}
-          width={"38rem"}
-          src="https://imgpile.com/images/9f8HEF.jpg"
+          display={"flex"}
+          justifyContent={"center"}
+          width={"50%"}
+          src="https://imgpile.com/images/9fgS8u.gif"
         />
         <Box
-          as={"b"}
-          color="#ffb917"
-          fontSize={"3xl"}
+          as="div"
           position={"absolute"}
-          bottom={"30px"}
-          left={"470px"}
+          color="#1B7B79"
+          top={"22%"}
+          left={"25%"}
+          fontSize={"3vw"}
         >
-          20%
+          40 WPM
         </Box>
-        <Box position={"absolute"} bottom={"65px"} right={"395px"}>
-          <Text color="#1B7B79" fontSize={"2xl"} as={"b"}>
-            40 WPM
-          </Text>
+        <Box
+          as="div"
+          position={"absolute"}
+          color="#1B7B79"
+          bottom={"20%"}
+          left={"36%"}
+          fontSize={"3vw"}
+        >
+          20 %
         </Box>
       </Box>
     </Box>

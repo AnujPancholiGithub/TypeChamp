@@ -5,7 +5,7 @@ import { startTime } from "../redux/actions/resultAction";
 
 export const TestTimer = () => {
   const [timer, setTimer] = useState(0);
-  const time = useSelector((store) => store.time);
+  const { time, deadline } = useSelector((store) => store);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,7 +15,9 @@ export const TestTimer = () => {
         setTimer((t) => t + 1);
       }, 1000);
     }
-
+    setTimeout(() => {
+      clearInterval(intervalID);
+    }, deadline);
     return () => {
       clearInterval(intervalID);
       dispatch(startTime(false, 0));
@@ -27,7 +29,7 @@ export const TestTimer = () => {
     return () => {};
   }, [timer]);
 
-  return <Text>{time}</Text>;
+  return <Text as="b">{time}</Text>;
 };
 
 export const SpeedMeter = ({ wordCounter }) => {
@@ -40,7 +42,7 @@ export const SpeedMeter = ({ wordCounter }) => {
       const speedWPM = 60 / avgTimePerWord;
       setCurrentSpeed(Math.trunc(speedWPM));
     }
-  }, [time, wordCounter]);
+  }, [wordCounter]);
 
   useEffect(() => {
     return () => {
@@ -48,16 +50,21 @@ export const SpeedMeter = ({ wordCounter }) => {
     };
   }, []);
 
-  return <Text>{currentSpeed} WPM</Text>;
+  return <Text as="b">{currentSpeed} WPM</Text>;
 };
 
-export const AccuracyMeter = ({ typedText, targetText }) => {
-  const [accuracy, setAccuracy] = useState(100);
+export const AccuracyMeter = ({}) => {
+  const [accuracy, setAccuracy] = useState(0);
 
   const { correctWordsCount, inCorrectWordsCount } = useSelector(
     (store) => store
   );
-
+  console.log(
+    "correctWordsCount",
+    "inCorrectWordsCount",
+    correctWordsCount,
+    inCorrectWordsCount
+  );
   useEffect(() => {
     console.log(correctWordsCount, inCorrectWordsCount);
     if (correctWordsCount > 0 && inCorrectWordsCount > 0) {
@@ -66,11 +73,7 @@ export const AccuracyMeter = ({ typedText, targetText }) => {
       console.log("cureent accu: ", currAccuracy);
     }
     return () => {};
-  }, [correctWordsCount, inCorrectWordsCount]);
+  }, [inCorrectWordsCount, correctWordsCount]);
 
-  return (
-    <div>
-      <h3>Accuracy: {accuracy.toFixed(2)}%</h3>
-    </div>
-  );
+  return <Text as="b">{" " + accuracy.toFixed(2)}%</Text>;
 };

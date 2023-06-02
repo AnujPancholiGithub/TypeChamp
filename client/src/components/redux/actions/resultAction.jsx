@@ -1,6 +1,8 @@
 import {
   CORRECT_WORDS,
   INCORRECT_WORDS,
+  SET_FINAL_RESULT,
+  SET_TEST_DEADLINE,
   START_TIMER,
   STOP_TIMER,
 } from "./resultTypes";
@@ -23,5 +25,19 @@ export const inCorrectWords = (wordCount) => {
   return {
     type: INCORRECT_WORDS,
     inCorrectWordsCount: wordCount,
+  };
+};
+
+export const setFinalResult = (result) => {
+  return {
+    type: SET_FINAL_RESULT,
+    result,
+  };
+};
+
+export const setTestDeadline = (deadline) => {
+  return {
+    type: SET_TEST_DEADLINE,
+    deadline,
   };
 };

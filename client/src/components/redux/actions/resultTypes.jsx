@@ -3,3 +3,6 @@ export const STOP_TIMER = "STOP TIMER";
 
 export const CORRECT_WORDS = "CORRECT WORDS";
 export const INCORRECT_WORDS = "INCORRECT WORDS";
+
+export const SET_FINAL_RESULT = "SET_FINAL_RESULT";
+export const SET_TEST_DEADLINE = "SET TIME TIMER";

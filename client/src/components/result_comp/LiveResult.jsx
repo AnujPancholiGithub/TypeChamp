@@ -1,13 +1,21 @@
 import React from "react";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, useColorModeValue } from "@chakra-ui/react";
 import { AccuracyMeter, SpeedMeter, TestTimer } from "../config/Calculations";
 
 const LiveResult = ({ isTestStart, wordCounter }) => {
-  console.log("isTestStart: ", isTestStart);
-
+  // console.log("isTestStart: ", isTestStart);
+  const cardBgColor = useColorModeValue("white", "gray.800");
+  const cardShadow = useColorModeValue("lg", "dark-lg");
   return (
     <>
-      <HStack justifyContent="space-between">
+      <HStack
+        bg={cardBgColor}
+        shadow={cardShadow}
+        flex={4}
+        boxShadow={"base"}
+        p={4}
+        justifyContent="space-between"
+      >
         <Box>
           Timer: {isTestStart ? <TestTimer /> : 0}
           {/* Render the TestTimer component only if the test is started */}

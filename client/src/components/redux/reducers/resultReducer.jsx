@@ -11,8 +11,11 @@ const initialState = {
   time: 0,
   correctWordsCount: 0,
   inCorrectWordsCount: 0,
-  finalResult: {},
-  deadline: 60000,
+  finalResult: {
+    speed: 0,
+    accuracy: "0 %",
+  },
+  deadline: 1000,
 };
 
 export const resultReducer = (state = initialState, action) => {
@@ -36,9 +39,16 @@ export const resultReducer = (state = initialState, action) => {
       };
 
     case SET_FINAL_RESULT:
+      const { speed, accuracy } = action.result;
+      const updatedFinalResult = {
+        ...state.finalResult,
+        speed: speed !== undefined ? speed : state.finalResult.speed,
+        accuracy:
+          accuracy !== undefined ? accuracy : state.finalResult.accuracy,
+      };
       return {
-        state,
-        finalResult: action.result,
+        ...state,
+        finalResult: updatedFinalResult,
       };
 
     case SET_TEST_DEADLINE:

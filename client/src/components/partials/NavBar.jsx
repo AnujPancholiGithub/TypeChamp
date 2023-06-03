@@ -20,6 +20,7 @@ const Navbar = () => {
         <IconButton
           aria-label="Toggle Theme"
           icon={isDarkMode ? <FaSun /> : <FaMoon />}
+          tabIndex={-1}
           onClick={toggleColorMode}
         />
         <Spacer />

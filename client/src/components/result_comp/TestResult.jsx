@@ -1,7 +1,10 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const TestResult = () => {
+  const { finalResult } = useSelector((store) => store);
+
   return (
     <Box bg="#d3c7ed" display={"flex"} justifyContent={"center"}>
       <Box boxShadow={"dark-lg"} position={"relative"}>
@@ -14,22 +17,22 @@ const TestResult = () => {
         <Box
           as="div"
           position={"absolute"}
-          color="#1B7B79"
+          color="#1C3C50"
           top={"22%"}
-          left={"25%"}
+          left={"26%"}
           fontSize={"3vw"}
         >
-          40 WPM
+          {finalResult.speed} WPM
         </Box>
         <Box
           as="div"
           position={"absolute"}
-          color="#1B7B79"
+          color="#1C3C50"
           bottom={"20%"}
           left={"36%"}
           fontSize={"3vw"}
         >
-          20 %
+          {finalResult.accuracy}
         </Box>
       </Box>
     </Box>

@@ -6,8 +6,10 @@ import {
   Box,
   useColorModeValue,
   useColorMode,
+  WrapItem,
+  Tooltip,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTestDeadline } from "../redux/actions/resultAction";
 import { useState } from "react";
 
@@ -16,6 +18,8 @@ const TimeSelectorMenu = ({ isTestStart }) => {
   const [isDeadLine, setIsDeadLine] = useState(false);
   const { colorMode } = useColorMode();
   const dispatch = useDispatch();
+  const { deadline } = useSelector((store) => store);
+
   const handleTimeSelection = (timeIndex) => {
     //setting up deadline for test
     const miliseconds = [300000, 180000, 120000, 60000];
@@ -34,14 +38,25 @@ const TimeSelectorMenu = ({ isTestStart }) => {
       width="100%"
     >
       <Menu>
-        <MenuButton
-          as={Box}
-          p={2}
-          color={colorMode === "light" ? "gray.800" : "white"}
-          fontWeight="medium"
-        >
-          {isDeadLine ? isDeadLine : "Select Time"}
-        </MenuButton>
+        <WrapItem>
+          <Tooltip
+            label="Select Test Duration"
+            hasArrow
+            arrowSize={8}
+            placement="top"
+            isOpen={deadline > 1000 ? false : true}
+          >
+            <MenuButton
+              as={Box}
+              p={2}
+              color={colorMode === "light" ? "gray.800" : "white"}
+              fontWeight="medium"
+            >
+              {isDeadLine ? isDeadLine : "Select Time"}
+            </MenuButton>
+          </Tooltip>
+        </WrapItem>
+
         <MenuList>
           {timeOptions.map((time, index) => (
             <MenuItem

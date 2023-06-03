@@ -9,11 +9,10 @@ const Loader = () => {
     <Box
       display="flex"
       flexDir={"column"}
-      gap={"5%"}
+      gap={"16px"}
+      mt={"15%"}
       justifyContent="center"
       alignItems="center"
-      height="80vh"
-      backgroundColor={colorMode === "dark" ? "black" : "white"}
     >
       <div
         style={{

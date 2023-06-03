@@ -1,7 +1,20 @@
+if (process.env.NODE_ENV !== "production") {
+  console.error("Server Using DotEnv()");
+  require("dotenv").config();
+}
+
 const express = require("express");
+const mongoConnect = require("./configs/db");
+
+mongoConnect();
 const app = express();
-app.all("/", (req, res) => {
-  console.log("Just got a request!");
-  res.send("SitaRam Ji!");
+
+app.get("/", (req, res) => {
+  res.send("Ram ram ji");
 });
-app.listen(process.env.PORT || 3000);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log("Server Started On:", PORT, "PORT");
+});

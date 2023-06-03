@@ -26,3 +26,12 @@
   border-left: 10px solid #bbb;
   animation: cursor-animation 1.3s infinite;
 }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

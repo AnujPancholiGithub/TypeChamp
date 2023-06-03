@@ -5,6 +5,7 @@ import {
   CardBody,
   CardHeader,
   Flex,
+  HStack,
   Heading,
   Image,
   Stack,
@@ -14,11 +15,13 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const TestResult = () => {
   const { finalResult, inCorrectWordsCount } = useSelector((store) => store);
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === "dark";
+  const navigateTo = useNavigate();
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <Box position={"relative"}>
@@ -55,13 +58,14 @@ const TestResult = () => {
         </Box>
         <Box
           display={"flex"}
-          top={{ base: "100%", sm: "100%", md: "5%", lg: "10%" }}
+          top={{ base: "100%", sm: "100%", md: "5%", lg: "0%" }}
           right={{ base: "5%", sm: "20%", md: "0%", lg: "10%" }}
           marginLeft={{ base: "0", sm: "0", md: "60%", lg: "60%" }}
           fontSize={"3vw"}
           flexWrap={"wrap"}
           as="div"
           position={"absolute"}
+          boxShadow={"xl"}
         >
           <Card>
             <CardHeader>
@@ -100,8 +104,22 @@ const TestResult = () => {
                     Tip
                   </Heading>
                   <Text pt="2" fontSize="sm">
-                    See a detailed analysis of all your business clients.
+                    Nothing is mastered overnight, and in order to really
+                    improve your typing accuracy and speed, you need to practice
+                    every day.
                   </Text>
+                  <HStack justify={"center"}>
+                    <Button
+                      m={4}
+                      p={4}
+                      colorScheme={isDarkMode ? "yellow" : "blue"}
+                      onClick={(e) => {
+                        return navigateTo("/test");
+                      }}
+                    >
+                      Take Test Again
+                    </Button>
+                  </HStack>
                 </Box>
               </Stack>
             </CardBody>

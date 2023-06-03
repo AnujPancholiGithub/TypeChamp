@@ -17,7 +17,7 @@ const HomePage = () => {
       color={isDarkMode ? "white" : "#1C3C50"}
     >
       <Heading as="h1" fontSize="4xl" textAlign="center" mb={4}>
-        TypeChamp - Unleash Your Typing Skills
+        TypeChamp - Unleash Your Typing Skills!
       </Heading>
       <Text fontSize="xl" textAlign="center" mb={8}>
         Become a Keyboard Maestro!

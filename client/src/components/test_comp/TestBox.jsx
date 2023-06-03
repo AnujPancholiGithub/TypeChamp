@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { correctWords, inCorrectWords } from "../redux/actions/resultAction";
 import TimeSelectorMenu from "./TimerMenu";
 import keyValidation from "../config/KeyValidation";
+import randomizeArray from "../config/randomTextGenrater";
 let correctWordsCount = 0;
 let inCorrectWordsCount = 0;
 
@@ -34,16 +35,27 @@ const TestBox = () => {
   const toast = useToast();
   const isDarkMode = colorMode === "dark";
   const dispatch = useDispatch();
+  const [newContent, setNewContent] = useState(false);
   const reduxStore = useSelector((store) => store);
 
   const testText = testData.text;
-  const wordsArray = Array.from(testText).slice(0, 235);
+  const firstWordsArray = Array.from(testText).slice(0, 235);
+  const [wordsArray, setWordsArray] = useState(() => firstWordsArray);
+
   const handleKeyPress = (e) => {
     e.preventDefault();
     if (!keyValidation(e.key)) {
       return;
     }
-
+    if (currentKey == wordsArray.length - 1) {
+      setWordsArray((oldArray) => [
+        ...oldArray,
+        " ",
+        ...randomizeArray(wordsArray),
+      ]);
+      setCurrentKey((oldKey) => oldKey + 1);
+      return;
+    }
     setPressedKey(e.key);
 
     if (e.code === "Space" && !typoError && wordsArray[currentKey] === " ") {
@@ -90,6 +102,13 @@ const TestBox = () => {
     setCurrentKey((oCk) => 0);
     setTypoError((oTe) => false);
   }, [show]);
+
+  // useEffect(() => {
+  //   setPressedKey((oPk) => " ");
+  //   setCurrentKey((oCk) => 0);
+  //   setTypoError((oTe) => false);
+  //   setNewContent((old) => false);
+  // }, [newContent]);
 
   const handleResetTest = () => {
     setShow(!show);
@@ -138,7 +157,9 @@ const TestBox = () => {
                     ? "#F5B930"
                     : "blue"
                   : isDarkMode
-                  ? "white"
+                  ? currentKey > index
+                    ? "pink"
+                    : "white"
                   : currentKey > index
                   ? "gray.300"
                   : "black"
@@ -153,8 +174,17 @@ const TestBox = () => {
           ))}
         </Text>
         {showPressedKeys && (
-          <Heading textAlign="center" mb={4}>
-            Keystrokesdf: {pressedKey}
+          <Heading
+            display={"flex"}
+            justifyContent={"center"}
+            textAlign="center"
+            fontSize={"lg"}
+            mb={4}
+          >
+            Keystroke :{" "}
+            <Text marginLeft={2} color={"#1CEDC9"}>
+              {" " + pressedKey}
+            </Text>
           </Heading>
         )}
         <Box display="flex" justifyContent="center">

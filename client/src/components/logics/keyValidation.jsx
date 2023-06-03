@@ -1,13 +1,12 @@
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz";
-const SYMBOLS = "~!@#$%^&*()_-+={}[]|\\'\"<>:;,./?";
+// const SYMBOLS = "~!@#$%^&*()_-+={}[]|\\'\"<>:;,./?";
 const NUMBERS = "0123456789";
 
-export const TESTER_KEYS = [
+const TESTER_KEYS = [
   ...ALPHABETS,
   " ",
   "Space",
   ...ALPHABETS.toUpperCase(),
-  ...SYMBOLS,
   ...NUMBERS,
 ];
 

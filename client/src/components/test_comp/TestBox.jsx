@@ -18,9 +18,10 @@ import LiveResult from "../result_comp/LiveResult";
 import { useDispatch, useSelector } from "react-redux";
 import { correctWords, inCorrectWords } from "../redux/actions/resultAction";
 import TimeSelectorMenu from "./TimerMenu";
-import keyValidation from "../config/KeyValidation";
-import randomizeArray from "../config/randomTextGenrater";
+
+import randomizeArray from "../logics/randomTextGenrater";
 import Loader from "../partials/Loader";
+import keyValidation from "../logics/keyValidation";
 let correctWordsCount = 0;
 let inCorrectWordsCount = 0;
 const testText = testData.text;

@@ -181,7 +181,7 @@ const TestBox = () => {
                             : "blue"
                           : isDarkMode
                           ? currentKey > index
-                            ? "pink"
+                            ? "pink.200"
                             : "white"
                           : currentKey > index
                           ? "gray.300"

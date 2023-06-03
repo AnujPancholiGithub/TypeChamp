@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, HStack, Progress, useColorModeValue } from "@chakra-ui/react";
-import { AccuracyMeter, SpeedMeter, TestTimer } from "../config/Calculations";
+import { AccuracyMeter, SpeedMeter, TestTimer } from "../logics/Calculations";
 
 const LiveResult = ({ isTestStart, wordCounter }) => {
   // console.log("isTestStart: ", isTestStart);

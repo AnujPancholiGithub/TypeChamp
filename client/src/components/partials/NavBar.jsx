@@ -30,7 +30,7 @@ const Navbar = () => {
           boxSize={20}
         />
         <Spacer />
-        <Avatar name="John Doe" src="avatar-image-url" size="sm" />
+        <Avatar name="Anuj Pancholi" src="avatar-image-url" size="sm" />
       </Flex>
     </Box>
   );
